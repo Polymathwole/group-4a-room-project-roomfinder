@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Room Checker App</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+
+        <div class="container">
+
+            <h1><b>Room Checker</b></h1>
+            <hr><br>
+            <p><i style="font-size: 18px; font-weight: bold;">Enter the category of room you need...</i></p>
+
+
+            <div class="select">
+                <label for="type">Category: </label>
+                <select id="type" name="type">
+                    <option value="Meeting">Meeting</option>
+                    <option value="Games">Games</option>
+                    <option value="QuietTime">Quiet-time</option>
+                    <option value="Learning">Learning</option>
+                    <option value="Work">Working</option>
+                </select>
+
+                <input id="btn" type="submit" value="Submit">
+            </div>
+
+
+            <div date-display>
+                <table>
+                    <tr>
+                        <th>Room Activity</th>
+                        <th>Room Number</th>
+                        <th>Availability</th>
+                    </tr>
+                    <tbody id="showData">
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            Copyright &copy; Andela BootCamp Cycle XXII Group-4
+        </footer>
+
+        <script src="js/jquery-3.1.0.js"></script>
+        <script src="js/rooms.js"></script>
+        <script>
+            $(function(){
+                $('#btn').click(function() {
+                    let inputType = $('#type').val();
+                    let roomType,
+                        output;
+
+                    for (let item in Rooms) {
+                        if (item === inputType) {
+                            roomType = item;
+                            selectRoom = Rooms[roomType]['rooms'];
+                            for (let i in selectRoom) {
+                                output += `
+                                    <tr><td>${roomType}</td>
+                                    <td>${i}</td>
+                                    <td>${selectRoom[i]}</td></tr>`
+                            }
+                        }
+                    }
+                    $('#showData').empty();
+                    $('#showData').append(output);
+
+                });
+            });
+        </script>
+    </body>
+</html>
